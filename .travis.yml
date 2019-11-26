@@ -1,0 +1,49 @@
+branches:
+  only:
+  - master
+matrix:
+  include:
+  - os: linux
+    sudo: true
+    name: electron
+    language: node_js
+    dist: trusty
+    node_js:
+      - 10
+    addons:
+      apt:
+        update: true
+        sources:
+        - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+          key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        - sourceline: deb https://dl.google.com/linux/deb/ stable main
+          key_url: https://dl.google.com/linux/linux_signing_key.pub
+        - google-chrome
+        - rabbitmq-trusty
+        packages:
+          - yarn
+          - jq
+          - gradle
+          - sshpass
+          - dos2unix
+    cache:
+      npm: false
+before_install:
+  - export SSHPASS=$ALIYUN_PASS
+  - npm install -g ionic cordova
+  - npm install electron -g --unsafe-perm=true --allow-root
+  - npm install electron-packager -g --unsafe-perm=true --allow-root
+  - npm install electron-installer-dmg -g --unsafe-perm=true --allow-root
+  - ionic start mwxing-pm blank --type=angular
+install:
+  - cd mwxing-pm
+  - npm install --save-dev electron
+  - npm install --save-dev electron-packager
+  - npm install --save-dev electron-installer-dmg
+script:
+  - cd ..
+  - tar -zcvf mwxing-pm.tar.gz ./mwxing-pm
+  - sshpass -e scp -o stricthostkeychecking=no mwxing-pm.tar.gz root@www.guobaa.com:/opt/dev/coverage/mwxing-pm.tar.gz
+env:
+  global:
+  - LANG=zh_CN.UTF-8
