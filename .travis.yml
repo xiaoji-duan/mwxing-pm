@@ -41,8 +41,7 @@ install:
 #  - npm install --save-dev electron-packager
 #  - npm install --save-dev electron-installer-dmg
 script:
-  - npm run clean
-  - npm run build
+  - npm run linux-release
 #  - cd ..
 #  - tar -zcvf mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz ./mwxing-pm --exclude node_modules
 #  - sshpass -e scp -o stricthostkeychecking=no mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz root@www.guobaa.com:/opt/dev/coverage/mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz
