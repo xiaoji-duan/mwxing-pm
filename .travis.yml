@@ -42,7 +42,7 @@ install:
   - npm install --save-dev electron-installer-dmg
 script:
   - cd ..
-  - tar -zcvf mwxing-pm.tar.gz ./mwxing-pm
+  - tar -zcvf mwxing-pm.tar.gz ./mwxing-pm --exclude node_modules
   - sshpass -e scp -o stricthostkeychecking=no mwxing-pm.tar.gz root@www.guobaa.com:/opt/dev/coverage/mwxing-pm.tar.gz
 env:
   global:
