@@ -34,16 +34,18 @@ before_install:
   - npm install electron -g --unsafe-perm=true --allow-root
   - npm install electron-packager -g --unsafe-perm=true --allow-root
   - npm install electron-installer-dmg -g --unsafe-perm=true --allow-root
-  - ionic start mwxing-pm blank --type=angular
+#  - ionic start mwxing-pm blank --type=angular
 install:
-  - cd mwxing-pm
-  - npm install --save-dev electron
-  - npm install --save-dev electron-packager
-  - npm install --save-dev electron-installer-dmg
+#  - cd mwxing-pm
+#  - npm install --save-dev electron
+#  - npm install --save-dev electron-packager
+#  - npm install --save-dev electron-installer-dmg
 script:
-  - cd ..
-  - tar -zcvf mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz ./mwxing-pm --exclude node_modules
-  - sshpass -e scp -o stricthostkeychecking=no mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz root@www.guobaa.com:/opt/dev/coverage/mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz
+  - npm clean
+  - npm build
+#  - cd ..
+#  - tar -zcvf mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz ./mwxing-pm --exclude node_modules
+#  - sshpass -e scp -o stricthostkeychecking=no mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz root@www.guobaa.com:/opt/dev/coverage/mwxing-pm.$TRAVIS_BUILD_NUMBER.tar.gz
 env:
   global:
   - LANG=zh_CN.UTF-8
